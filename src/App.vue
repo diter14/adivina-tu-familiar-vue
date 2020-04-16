@@ -1,25 +1,23 @@
 <template>
     <v-app>
-        <!-- <v-app-bar app color="primary" dark>
-            <div class="d-flex align-center"></div>
-
-            <v-spacer></v-spacer>
-        </v-app-bar> -->
-
-        <v-content dark>
-            <v-container>
-                <div class="d-flex align-center">
-                    <h1>Hello World!</h1>
-                </div>
+        <v-content>
+            <v-container fill-height>
+                <router-view></router-view>
             </v-container>
         </v-content>
+        <main-footer></main-footer>
     </v-app>
 </template>
 
 <script>
+import MainFooter from '@/components/MainFooter'
 export default {
     name: 'App',
-
-    data: () => ({})
+    components: {
+        MainFooter
+    },
+    data() {
+        return {}
+    }
 }
 </script>
