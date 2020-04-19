@@ -185,19 +185,19 @@ export default {
 
         generateRandomIndex(random_index) {
             let guessed_members = []
-            if (localStorage.getItem('guessed-members')) {
-                guessed_members = JSON.parse(
-                    localStorage.getItem('guessed-members')
-                )
-                if (guessed_members.includes(this.random_member.id)) {
-                    return this.generateRandomIndex(random_index)
-                }
-            }
-            guessed_members.push(this.members[random_index].id)
-            localStorage.setItem(
-                'guessed-members',
-                JSON.stringify(guessed_members)
-            )
+            // if (localStorage.getItem('guessed-members')) {
+            //     guessed_members = JSON.parse(
+            //         localStorage.getItem('guessed-members')
+            //     )
+            //     if (guessed_members.includes(this.random_member.id)) {
+            //         return this.generateRandomIndex(random_index)
+            //     }
+            // }
+            // guessed_members.push(this.members[random_index].id)
+            // localStorage.setItem(
+            //     'guessed-members',
+            //     JSON.stringify(guessed_members)
+            // )
             return random_index
         },
 
