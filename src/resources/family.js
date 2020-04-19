@@ -115,12 +115,7 @@ export default {
         {
             id: 12,
             name: 'Gladys',
-            clues: [
-                'Soy gritona',
-                'Perseverante',
-                'Veo muchas novelas',
-                'Canto muy fuerte',
-            ],
+            clues: ['Soy gritona', 'Perseverante', 'Canto muy fuerte'],
             nears: ['Mamá Polita', 'Randy'],
             img_path: 'mother.svg',
         },
@@ -134,6 +129,13 @@ export default {
             ],
             nears: ['Jeny', 'Paty'],
             img_path: 'girl-1.svg',
+        },
+        {
+            id: 14,
+            name: 'Christopher',
+            clues: ['Me gusta jugar fútbol', 'Soy alto', 'Juego playstation'],
+            nears: ['Dario', 'Paty'],
+            img_path: 'teenager-2.svg',
         },
     ],
 }

@@ -103,6 +103,7 @@
             right
             direction="left"
             transition="slide-x-reverse-transition"
+            v-if="ready"
         >
             <template v-slot:activator>
                 <v-btn color="amber lighten-1" dark fab @click="showComodin()">
@@ -145,14 +146,16 @@ export default {
 
     mounted() {
         let self = this,
+            random_index = null,
             random_interval = setInterval(() => {
-                self.random_member =
-                    self.members[
-                        Math.floor(Math.random() * self.members.length)
-                    ]
+                random_index = Math.floor(Math.random() * self.members.length)
+                self.random_member = self.members[random_index]
             }, 100)
         setTimeout(() => {
             clearInterval(random_interval)
+            console.log(self.random_member)
+            self.random_member =
+                self.members[self.generateRandomIndex(random_index)]
             self.generatePossibleMembers({ ...self.random_member })
             self.ready = true
         }, 3000)
@@ -178,6 +181,24 @@ export default {
                 return hidden_text
             }
             return ''
+        },
+
+        generateRandomIndex(random_index) {
+            let guessed_members = []
+            if (localStorage.getItem('guessed-members')) {
+                guessed_members = JSON.parse(
+                    localStorage.getItem('guessed-members')
+                )
+                if (guessed_members.includes(this.random_member.id)) {
+                    return this.generateRandomIndex(random_index)
+                }
+            }
+            guessed_members.push(this.members[random_index].id)
+            localStorage.setItem(
+                'guessed-members',
+                JSON.stringify(guessed_members)
+            )
+            return random_index
         },
 
         chooseMember() {
