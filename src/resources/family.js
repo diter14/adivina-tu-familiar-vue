@@ -1,19 +1,5 @@
 export default {
     members: [
-        {
-            id: 1,
-            name: 'Luthor',
-            clues: ['A veces travieso', 'Soy Blanco', 'Hago reír'],
-            nears: ['Christopher', 'Che Dario'],
-            img_path: 'dog-2.svg',
-        },
-        {
-            id: 2,
-            name: 'Mau',
-            clues: ['Soy dormilón', 'A veces lloro', 'Me gusta comer'],
-            nears: ['María', 'Elena'],
-            img_path: 'cat-1.svg',
-        },
         // {
         //     name: 'Ruso',
         //     clues: ['Dormilón', 'A veces lloro', 'Me gusta comer'],
@@ -24,6 +10,20 @@ export default {
         //     clues: ['Dormilón', 'A veces lloro', 'Me gusta comer'],
         //     nears: ['Manu',]
         // },
+        {
+            id: 1,
+            name: 'Luthor',
+            clues: ['A veces travieso', 'Soy Blanco', 'Hago reír'],
+            nears: ['Christopher', 'Che Dario'],
+            img_path: 'dog-2.svg',
+        },
+        {
+            id: 2,
+            name: 'Mau',
+            clues: ['Paro durmiendo', 'A veces lloro', 'Soy plomo'],
+            nears: ['María de los Ángeles', 'Elena'],
+            img_path: 'cat-1.svg',
+        },
         {
             id: 3,
             name: 'Tommy',
@@ -88,6 +88,52 @@ export default {
             ],
             nears: ['Lucha', 'Hilda', 'Walter', 'Gladys', 'Elena'],
             img_path: 'grandmother.svg',
+        },
+        {
+            id: 10,
+            name: 'María de los Ángeles',
+            clues: [
+                'Me gusta leer libros',
+                'Estudio enfermería',
+                'Soy tranquila',
+            ],
+            nears: ['Elena', 'Eudes'],
+            img_path: 'girl-2.svg',
+        },
+        {
+            id: 11,
+            name: 'Leo',
+            clues: [
+                'Me gusta jugar fútbol',
+                'Amigo grande',
+                'Juego muchos videojuegos',
+                'River Plate 🤍',
+            ],
+            nears: ['Marlene', 'Diego'],
+            img_path: 'teenager-1.svg',
+        },
+        {
+            id: 12,
+            name: 'Gladys',
+            clues: [
+                'Soy gritona',
+                'Perseverante',
+                'Veo muchas novelas',
+                'Canto muy fuerte',
+            ],
+            nears: ['Mamá Polita', 'Randy'],
+            img_path: 'mother.svg',
+        },
+        {
+            id: 13,
+            name: 'Alexia',
+            clues: [
+                'Me gusta hablar mucho',
+                'Tomo muchas fotos',
+                'Juego en mi celular',
+            ],
+            nears: ['Jeny', 'Paty'],
+            img_path: 'girl-1.svg',
         },
     ],
 }

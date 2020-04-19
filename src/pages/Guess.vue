@@ -58,12 +58,11 @@
         <v-dialog v-model="comodin.open" width="300" persistent>
             <v-card>
                 <v-card-title primary-title>
-                    <template v-if="comodin.attemps <= 2">
-                        Tienes poco tiempo
-                    </template>
-                    <template v-else>
-                        Lo sentimos
-                    </template>
+                    {{
+                        comodin.attemps !== 2
+                            ? 'Tienes poco tiempo'
+                            : 'Lo sentimos'
+                    }}
                     <v-chip dark class="ma-2" color="red accent-2">
                         {{ comodin.timer }}
                     </v-chip>
@@ -211,6 +210,10 @@ export default {
             }
             this.possible_members = possible_members
         },
+
+        // chooseNears(nears) {
+        //     // let number_nears = nears.length > 3 ? nears.length : 3
+        // },
 
         showComodin() {
             this.comodin.open = true
