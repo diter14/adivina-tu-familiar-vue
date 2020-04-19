@@ -4,13 +4,15 @@ export default {
             id: 1,
             name: 'Luthor',
             clues: ['A veces travieso', 'Soy Blanco', 'Hago reír'],
-            nears: ['Christopher', 'Che Dario']
+            nears: ['Christopher', 'Che Dario'],
+            img_path: '/img/dog-2.svg'
         },
         {
             id: 2,
             name: 'Mau',
             clues: ['Soy dormilón', 'A veces lloro', 'Me gusta comer'],
-            nears: ['María', 'Elena']
+            nears: ['María', 'Elena'],
+            img_path: '/img/cat-1.svg'
         },
         // {
         //     name: 'Ruso',
@@ -26,13 +28,15 @@ export default {
             id: 3,
             name: 'Tommy',
             clues: ['Me gusta tomar sol', 'Bailarín', 'Soy juguetón'],
-            nears: ['Diter', 'Olinda']
+            nears: ['Diter', 'Olinda'],
+            img_path: '/img/dog-happy.svg'
         },
         {
             id: 4,
             name: 'Luna',
             clues: ['Me gusta comer', 'Soy rastreador', 'Amo dormir'],
-            nears: ['Manu', 'Liz']
+            nears: ['Manu', 'Liz'],
+            img_path: '/img/dog-1.svg'
         },
         {
             id: 5,
@@ -42,7 +46,44 @@ export default {
                 'No tengo miedo a nada',
                 'Orejas de avión'
             ],
-            nears: ['Olinda', 'Manu']
+            nears: ['Olinda', 'Manu'],
+            img_path: '/img/dog-2.svg'
+        },
+        {
+            id: 6,
+            name: 'Liam',
+            clues: ['Soy bailarín', 'Me gusta jugar', 'Veo dibujos en YouTube'],
+            nears: ['Eudes', 'Jessica'],
+            img_path: '/img/boy-1.svg'
+        },
+        {
+            id: 7,
+            name: 'Leandro',
+            clues: [
+                'Me gusta jugar fútbol',
+                'Tengo una tablet',
+                'Sé contar en inglés'
+            ],
+            nears: ['Eudes', 'Jessica'],
+            img_path: '/img/boy-2.svg'
+        },
+        {
+            id: 8,
+            name: 'Randy',
+            clues: ['Sporting Cristal 💗', 'Gamer', 'Soy un cra'],
+            nears: ['Gladys', 'Elena'],
+            img_path: '/img/teenager-1.svg'
+        },
+        {
+            id: 9,
+            name: 'Mamá Polita',
+            clues: [
+                'Siempre pienso en todos',
+                'Soy bien fuerte',
+                'No me gustan los flojos'
+            ],
+            nears: ['Lucha', 'Hilda', 'Walter', 'Gladys', 'Elena'],
+            img_path: '/img/grandmother.svg'
         }
     ]
 }

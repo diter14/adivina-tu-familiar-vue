@@ -181,12 +181,12 @@ export default {
         },
 
         chooseMember() {
-            if (this.selected_member_id === this.random_member.id) {
-                this.$store.commit('SET_WANTED_MEMBER', this.random_member)
-                alert('Yeeeeh adivinaste: ' + this.random_member.name)
-            } else {
-                alert('Buuuu equivocado')
-            }
+            this.$store.commit('SET_WANTED_MEMBER', this.random_member)
+            this.$store.commit(
+                'SET_GUESSED_RIGHT',
+                this.selected_member_id === this.random_member.id
+            )
+            this.$router.push('/adivinar/resultados')
         },
 
         generatePossibleMembers(random_member) {

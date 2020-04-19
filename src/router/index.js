@@ -13,12 +13,12 @@ const routes = [
         component: Home
     },
     {
-        path: '/adivina',
+        path: '/adivinar',
         name: 'guess',
         component: Guess
     },
     {
-        path: '/adivina/resultados',
+        path: '/adivinar/resultados',
         name: 'guess_results',
         component: GuessResults
     }

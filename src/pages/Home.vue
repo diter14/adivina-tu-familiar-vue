@@ -29,7 +29,7 @@
                 <v-scroll-x-reverse-transition>
                     <div class="d-flex justify-center">
                         <v-btn
-                            to="/adivina"
+                            to="/adivinar"
                             dark
                             color="red accent-2"
                             v-if="display_copy"
@@ -65,7 +65,7 @@ export default {
         }, 1200)
         setTimeout(() => {
             self.display_copy = true
-        }, 2500)
+        }, 2000)
     }
 }
 </script>
