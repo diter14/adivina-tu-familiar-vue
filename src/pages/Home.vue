@@ -2,27 +2,26 @@
     <v-container fill-height>
         <bubble top />
         <bubble bottom color="#26a69a" />
-        <v-row align="center" justify="center">
+        <v-row align="center" justify="center" dense>
             <v-col>
                 <v-scroll-x-transition>
                     <div class="d-flex justify-center" v-if="display_cover">
                         <img
                             src="@/assets/img/family.svg"
-                            class="mx-auto"
-                            width="80%"
+                            class="mx-auto main-image"
                         />
                     </div>
                 </v-scroll-x-transition>
                 <v-scroll-x-reverse-transition>
                     <h1
-                        class="text-center font-weight-bold mb-5"
+                        class="text-center font-weight-bold mb-3"
                         v-if="display_copy"
                     >
                         ¿Adivinas qué familiar soy?
                     </h1>
                 </v-scroll-x-reverse-transition>
                 <v-scroll-x-transition>
-                    <p class="text-center mb-5" v-if="display_copy">
+                    <p class="text-center mb-3" v-if="display_copy">
                         ¿Estás seguro?
                     </p>
                 </v-scroll-x-transition>
@@ -35,6 +34,9 @@
                             v-if="display_copy"
                         >
                             ADIVINA
+                            <v-icon dark right>
+                                mdi-arrow-right
+                            </v-icon>
                         </v-btn>
                     </div>
                 </v-scroll-x-reverse-transition>
@@ -48,13 +50,13 @@ export default {
     name: 'Home',
 
     components: {
-        Bubble
+        Bubble,
     },
 
     data() {
         return {
             display_cover: false,
-            display_copy: false
+            display_copy: false,
         }
     },
 
@@ -66,6 +68,6 @@ export default {
         setTimeout(() => {
             self.display_copy = true
         }, 2000)
-    }
+    },
 }
 </script>

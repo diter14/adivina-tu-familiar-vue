@@ -7,10 +7,11 @@
 </template>
 
 <script>
+import './assets/scss/app.scss'
 export default {
     name: 'App',
     data() {
         return {}
-    }
+    },
 }
 </script>

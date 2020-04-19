@@ -1,0 +1,16 @@
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.main-image {
+    width: 60%;
+
+    @media screen and (min-device-width: 375px) {
+        width: 50vh;
+    }
+}
+
+.v-content__wrap {
+    overflow: hidden !important;
+}

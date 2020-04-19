@@ -4,42 +4,46 @@
         <bubble bottom color="#26a69a" />
         <v-row align="center" justify="center">
             <v-col>
-                <v-row>
+                <v-row dense>
                     <v-col cols="12" class="text-center">
-                        <h1 class="font-weight-bold">
+                        <h2 class="font-weight-bold">
                             {{
                                 guessed_right
-                                    ? 'Yeeeeh!!! Adivinaste 🎉'
-                                    : 'Ouhhh!!! No adivinaste 😔'
+                                    ? 'Yeh!!! Adivinaste 🎉'
+                                    : 'Ohh!!! No adivinaste 😔'
                             }}
-                        </h1>
+                        </h2>
                     </v-col>
                 </v-row>
-                <v-row>
+                <v-row dense>
                     <v-col cols="12" class="text-center">
                         <div class="d-flex justify-center">
                             <img
                                 :src="memberImagePath"
-                                class="mx-auto"
-                                width="50%"
+                                class="mx-auto main-image"
                             />
                         </div>
                     </v-col>
                 </v-row>
-                <v-row>
+                <v-row dense>
                     <v-col cols="12" class="text-center">
-                        <h2>
+                        <h3>
                             {{
                                 guessed_right
                                     ? `Te acordaste de mí, soy ${wanted_member.name} 🎉`
                                     : `No te acordaste de mí, soy ${wanted_member.name} 😔`
                             }}
-                        </h2>
+                        </h3>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col cols="12" class="text-center">
-                        <v-btn color="red accent-2" dark to="/adivinar">
+                        <v-btn
+                            color="red accent-2"
+                            dark
+                            class="font-weight-bold"
+                            to="/adivinar"
+                        >
                             VOLVER A ADIVINAR
                         </v-btn>
                     </v-col>

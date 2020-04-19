@@ -1,8 +1,8 @@
 <template>
     <div :class="position">
         <svg
+            height="98"
             width="100%"
-            height="151"
             viewBox="0 0 471 151"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -24,16 +24,16 @@ export default {
     props: {
         color: {
             type: String,
-            default: '#ffca28'
+            default: '#ffca28',
         },
         top: {
             type: Boolean,
-            default: false
+            default: false,
         },
         bottom: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
 
     computed: {
@@ -41,24 +41,32 @@ export default {
             return (
                 'bubble ' + (this.bottom ? 'bottom' : this.top ? 'top' : 'top')
             )
-        }
-    }
+        },
+    },
 }
 </script>
 <style lang="scss">
 .bubble {
     position: absolute;
-    width: 100%;
+    // width: 100%;
 }
 
 .top {
-    top: -30px;
+    top: -40px;
     left: 0;
+    @media screen and (min-device-width: 375px) {
+        left: -5px;
+        top: -10px;
+    }
 }
 
 .bottom {
-    left: 0;
-    bottom: -30px;
+    right: 0;
+    bottom: -40px;
     transform: rotate(180deg);
+    @media screen and (min-device-width: 375px) {
+        right: -5px;
+        bottom: -10px;
+    }
 }
 </style>

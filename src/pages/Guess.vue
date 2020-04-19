@@ -10,15 +10,16 @@
                             <h1 class="font-weight-bold">PISTAS</h1>
                         </v-col>
                     </v-row>
-                    <v-row>
+                    <v-row dense>
                         <v-col
                             cols="12"
+                            sm="12"
                             class="text-center"
                             :key="index"
                             v-for="(clue, index) in random_member.clues"
                         >
                             <v-chip
-                                class="ma-2"
+                                class="ma-2 font-weight-bold"
                                 label
                                 dark
                                 color="red accent-2"
@@ -27,12 +28,12 @@
                             </v-chip>
                         </v-col>
                     </v-row>
-                    <v-row>
+                    <v-row dense>
                         <v-col cols="12" class="text-center ">
                             <p>¿Adivinaste?</p>
                         </v-col>
                     </v-row>
-                    <v-row>
+                    <v-row dense>
                         <v-col cols="6" offset="3" class="text-center">
                             <v-select
                                 :items="possible_members"
@@ -120,7 +121,7 @@ export default {
     name: 'Guess',
 
     components: {
-        Bubble
+        Bubble,
     },
 
     data() {
@@ -134,8 +135,8 @@ export default {
                 attemps: 0,
                 open: false,
                 timer: 5,
-                interval: null
-            }
+                interval: null,
+            },
         }
     },
 
@@ -161,7 +162,7 @@ export default {
     methods: {
         hideText(text) {
             if (text) {
-                let number_randoms = Math.floor(text.length / 2) + 1,
+                let number_randoms = Math.floor(text.length / 2),
                     random_indexes = []
 
                 while (random_indexes.length < number_randoms) {
@@ -171,7 +172,7 @@ export default {
                     }
                 }
                 let hidden_text = text
-                random_indexes.forEach(random_index => {
+                random_indexes.forEach((random_index) => {
                     hidden_text = hidden_text.replaceAt(random_index, '*')
                 })
 
@@ -191,7 +192,7 @@ export default {
 
         generatePossibleMembers(random_member) {
             let possible_members = [],
-                random_member_index = this.members.findIndex(member => {
+                random_member_index = this.members.findIndex((member) => {
                     return member.id == random_member.id
                 })
             if (random_member_index !== -1) {
@@ -218,7 +219,7 @@ export default {
             self.comodin.interval = setInterval(() => {
                 self.comodin.timer--
             }, 1000)
-        }
+        },
     },
     watch: {
         'comodin.timer': function(new_value) {
@@ -227,8 +228,8 @@ export default {
                 this.comodin.open = false
                 this.comodin.timer = 5
             }
-        }
-    }
+        },
+    },
 }
 </script>
 <style lang="scss">
@@ -236,6 +237,6 @@ export default {
     letter-spacing: 3px;
 }
 .v-speed-dial--bottom {
-    bottom: 120px !important;
+    bottom: 50px !important;
 }
 </style>
