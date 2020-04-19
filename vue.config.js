@@ -1,5 +1,5 @@
 module.exports = {
     transpileDependencies: ['vuetify'],
-    basePath:
+    publicPath:
         process.env.NODE_ENV === 'production' ? '/adivina-tu-familiar' : '/'
 }
