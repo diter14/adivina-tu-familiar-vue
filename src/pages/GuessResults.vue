@@ -72,9 +72,6 @@ export default {
 
     computed: {
         ...mapState(['wanted_member', 'guessed_right'])
-    },
-
-    methods: {},
-    watch: {}
+    }
 }
 </script>
