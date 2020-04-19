@@ -19,7 +19,7 @@
                     <v-col cols="12" class="text-center">
                         <div class="d-flex justify-center">
                             <img
-                                :src="wanted_member.img_path"
+                                :src="memberImagePath"
                                 class="mx-auto"
                                 width="50%"
                             />
@@ -57,12 +57,12 @@ export default {
     name: 'Guess',
 
     components: {
-        Bubble
+        Bubble,
     },
 
     data() {
         return {
-            members: []
+            members: [],
         }
     },
 
@@ -71,7 +71,11 @@ export default {
     },
 
     computed: {
-        ...mapState(['wanted_member', 'guessed_right'])
-    }
+        ...mapState(['wanted_member', 'guessed_right']),
+
+        memberImagePath() {
+            return require(`@/assets/img/${this.wanted_member.img_path}`)
+        },
+    },
 }
 </script>

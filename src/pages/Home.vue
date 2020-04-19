@@ -7,7 +7,7 @@
                 <v-scroll-x-transition>
                     <div class="d-flex justify-center" v-if="display_cover">
                         <img
-                            src="/img/family.svg"
+                            src="@/assets/img/family.svg"
                             class="mx-auto"
                             width="80%"
                         />
