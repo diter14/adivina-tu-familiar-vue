@@ -39,7 +39,7 @@
                                 :items="possible_members"
                                 item-text="name"
                                 item-value="id"
-                                label="Soy ..."
+                                label="Selecciona ..."
                                 solo
                                 v-model="selected_member_id"
                                 @change="chooseMember()"
@@ -59,7 +59,7 @@
             <v-card>
                 <v-card-title primary-title>
                     {{
-                        comodin.attemps !== 2
+                        (3 > comodin.attemps)
                             ? 'Tienes poco tiempo'
                             : 'Lo sentimos'
                     }}
@@ -104,7 +104,7 @@
             direction="left"
             transition="slide-x-reverse-transition"
             v-if="ready"
-        >
+            >
             <template v-slot:activator>
                 <v-btn color="amber lighten-1" dark fab @click="showComodin()">
                     <v-icon dark>mdi-account-question</v-icon>
@@ -184,7 +184,7 @@ export default {
         },
 
         generateRandomIndex(random_index) {
-            let guessed_members = []
+            // let guessed_members = []
             // if (localStorage.getItem('guessed-members')) {
             //     guessed_members = JSON.parse(
             //         localStorage.getItem('guessed-members')
