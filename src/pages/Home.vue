@@ -4,42 +4,53 @@
         <bubble bottom color="#26a69a" />
         <v-row align="center" justify="center" dense>
             <v-col>
-                <v-scroll-x-transition>
+                <transition
+                    name="custom-classes-transition"
+                    enter-active-class="animated fadeInDown"
+                    >
                     <div class="d-flex justify-center" v-if="display_cover">
                         <img
                             src="@/assets/img/family.svg"
                             class="mx-auto main-image"
                         />
                     </div>
-                </v-scroll-x-transition>
-                <v-scroll-x-reverse-transition>
+                </transition>
+                <transition
+                    name="custom-classes-transition"
+                    enter-active-class="animated fadeInRight"
+                    >
                     <h1
                         class="text-center font-weight-bold mb-3"
-                        v-if="display_copy"
+                        v-if="display_cover"
                     >
-                        ¿Adivinas qué familiar soy?
+                        ¿Adivinas quién soy?
                     </h1>
-                </v-scroll-x-reverse-transition>
-                <v-scroll-x-transition>
-                    <p class="text-center mb-3" v-if="display_copy">
-                        ¿Estás seguro?
+                </transition>
+                <transition
+                    name="custom-classes-transition"
+                    enter-active-class="animated fadeInLeft"
+                    >
+                    <p class="text-center mb-3" v-if="display_cover">
+                        Adivina qué familiar soy
                     </p>
-                </v-scroll-x-transition>
-                <v-scroll-x-reverse-transition>
-                    <div class="d-flex justify-center">
+                </transition>
+                <transition
+                    name="custom-classes-transition"
+                    enter-active-class="animated fadeInUp"
+                    >
+                    <div class="d-flex justify-center" v-if="display_cover">
                         <v-btn
                             to="/adivinar"
                             dark
                             color="red accent-2"
-                            v-if="display_copy"
-                        >
+                            >
                             ADIVINA
                             <v-icon dark right>
                                 mdi-arrow-right
                             </v-icon>
                         </v-btn>
                     </div>
-                </v-scroll-x-reverse-transition>
+                </transition>
             </v-col>
         </v-row>
     </v-container>
@@ -56,7 +67,6 @@ export default {
     data() {
         return {
             display_cover: false,
-            display_copy: false,
         }
     },
 
@@ -64,10 +74,7 @@ export default {
         const self = this
         setTimeout(() => {
             self.display_cover = true
-        }, 1200)
-        setTimeout(() => {
-            self.display_copy = true
-        }, 2000)
+        }, 1000)
     },
 }
 </script>

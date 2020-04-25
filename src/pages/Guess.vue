@@ -3,19 +3,25 @@
         <bubble top />
         <bubble bottom color="#26a69a" />
         <v-row align="center" justify="center">
-            <v-col>
+            <transition-group
+                class="col"
+                name="custom-classes-transition"
+                enter-active-class="animated fadeInDown"
+                tag="div"
+                >
                 <template v-if="ready">
-                    <v-row>
+                    <v-row key="clues-title">
                         <v-col cols="12" class="text-center">
                             <h1 class="font-weight-bold">PISTAS</h1>
                         </v-col>
                     </v-row>
-                    <v-row dense>
+                    <v-row dense key="clues-items">
                         <v-col
                             cols="12"
                             sm="12"
                             class="text-center"
-                            :key="index"
+                            style="animation-duration: 2s"
+                            :key="`${index}_${clue}`"
                             v-for="(clue, index) in random_member.clues"
                         >
                             <v-chip
@@ -28,12 +34,12 @@
                             </v-chip>
                         </v-col>
                     </v-row>
-                    <v-row dense>
+                    <v-row dense key="clues-copy">
                         <v-col cols="12" class="text-center ">
                             <p>¿Adivinaste?</p>
                         </v-col>
                     </v-row>
-                    <v-row dense>
+                    <v-row dense key="clues-selection">
                         <v-col cols="6" offset="3" class="text-center">
                             <v-select
                                 :items="possible_members"
@@ -49,11 +55,11 @@
                     </v-row>
                 </template>
                 <template v-else>
-                    <h1 class="text-center mb-5 spacing-3">
+                    <h1 class="text-center mb-5 spacing-3" :key="'randomize-title'">
                         {{ hideText(random_member.name) }}
                     </h1>
                 </template>
-            </v-col>
+            </transition-group>
         </v-row>
         <v-dialog v-model="comodin.open" width="300" persistent>
             <v-card>
@@ -111,6 +117,21 @@
                 </v-btn>
             </template>
         </v-speed-dial>
+        <v-speed-dial
+            fab
+            absolute
+            bottom
+            left
+            direction="right"
+            transition="slide-x-transition"
+            v-if="ready"
+            >
+            <template v-slot:activator>
+                <v-btn color="amber lighten-1" dark fab to="/">
+                    <v-icon dark>mdi-home</v-icon>
+                </v-btn>
+            </template>
+        </v-speed-dial>
     </v-container>
 </template>
 <script>
@@ -153,9 +174,8 @@ export default {
             }, 100)
         setTimeout(() => {
             clearInterval(random_interval)
-            console.log(self.random_member)
-            self.random_member =
-                self.members[self.generateRandomIndex(random_index)]
+            // console.log(self.random_member)
+            self.random_member = self.members[self.generateRandomIndex(random_index)]
             self.generatePossibleMembers({ ...self.random_member })
             self.ready = true
         }, 3000)
