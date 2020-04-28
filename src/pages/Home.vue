@@ -2,10 +2,10 @@
     <v-container fill-height>
         <bubble top />
         <bubble bottom color="#26a69a" />
-            <!-- :interval="5000" -->
-            <!-- cycle -->
         <v-carousel 
+            cycle
             :light="true"
+            :interval="5500"
             :show-arrows="false"
             hide-delimiter-background
             :height="carousel_height"
@@ -68,11 +68,16 @@
                     >
                     <v-col>
                         <h2
-                            class="text-center font-weight-bold"
+                            class="text-center font-weight-bold mb-4"
                             >
                             Sólo tienes 10 segundos para adivinar, sigue las pistas
                         </h2>
-
+                        <div class="d-flex justify-center">
+                            <img
+                                src="@/assets/img/tour-timer.png"
+                                class="mx-auto main-image"
+                            />
+                        </div>
                     </v-col>
                 </v-row>
             </v-carousel-item>
@@ -88,27 +93,38 @@
                     >
                     <v-col>
                         <h2
-                            class="text-center font-weight-bold"
+                            class="text-center font-weight-bold mb-4"
                             >
                             Puedes usar los comodines hasta en 3 oportunidades
                         </h2>
-                        
+                        <div class="d-flex justify-center">
+                            <img
+                                src="@/assets/img/tour-comodin.png"
+                                class="mx-auto main-image"
+                            />
+                        </div>
                     </v-col>
                 </v-row>
             </v-carousel-item>
         </v-carousel>
         <v-row>
             <v-col class="d-flex justify-center align-center">
-                <v-btn
-                    to="/adivinar"
-                    dark
-                    color="red accent-2"
+                <transition
+                    name="custom-classes-transition"
+                    enter-active-class="animated fadeInUp"
                     >
-                    ADIVINA
-                    <v-icon dark right>
-                        mdi-arrow-right
-                    </v-icon>
-                </v-btn>
+                    <v-btn
+                        to="/adivinar"
+                        dark
+                        color="red accent-2"
+                        v-if="display_cover"
+                        >
+                        EMPIEZA
+                        <v-icon dark right>
+                            mdi-arrow-right
+                        </v-icon>
+                    </v-btn>
+                </transition>
             </v-col>
         </v-row>
     </v-container>

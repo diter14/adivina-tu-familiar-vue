@@ -103,12 +103,21 @@
             </v-progress-linear>
         </v-dialog>
         <v-speed-dial
-            fab
+            absolute
+            top
+            right
+            v-if="ready"
+            >
+            <template v-slot:activator>
+                <v-btn small color="red accent-2" dark fab>
+                    10
+                </v-btn>
+            </template>
+        </v-speed-dial>
+        <v-speed-dial
             absolute
             bottom
-            right
-            direction="left"
-            transition="slide-x-reverse-transition"
+            left
             v-if="ready"
             >
             <template v-slot:activator>
@@ -117,7 +126,7 @@
                 </v-btn>
             </template>
         </v-speed-dial>
-        <v-speed-dial
+        <!-- <v-speed-dial
             fab
             absolute
             bottom
@@ -131,7 +140,7 @@
                     <v-icon dark>mdi-home</v-icon>
                 </v-btn>
             </template>
-        </v-speed-dial>
+        </v-speed-dial> -->
     </v-container>
 </template>
 <script>
@@ -280,7 +289,7 @@ export default {
 .spacing-3 {
     letter-spacing: 3px;
 }
-.v-speed-dial--bottom {
-    bottom: 50px !important;
-}
+// .v-speed-dial--bottom {
+//     bottom: 50px !important;
+// }
 </style>
