@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../pages/Home'
 import Guess from '../pages/Guess'
-import GuessResults from '../pages/GuessResults'
+import GuessSingleResults from '../pages/GuessSingleResults'
+import store from '../store'
+import _ from 'lodash'
 
 Vue.use(VueRouter)
 
@@ -20,7 +22,15 @@ const routes = [
     {
         path: '/adivinar/resultados',
         name: 'guess_results',
-        component: GuessResults
+        component: GuessSingleResults,
+        beforeEnter: (to, from, next) => {
+            console.log(store.state.wanted_member)
+            if ( !_.isEmpty(store.state.wanted_member) ) {
+                next()
+            } else {
+                next('/')
+            }
+        }
     }
 ]
 
