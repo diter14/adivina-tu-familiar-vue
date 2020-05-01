@@ -61,11 +61,12 @@
                 </template>
             </transition-group>
         </v-row>
-        <v-dialog v-model="comodin.open" width="300" persistent>
+        <!-- Comodin Modal -->
+        <v-dialog v-model="comodin.open" width="300">
             <v-card>
                 <v-card-title primary-title>
                     {{
-                        (3 > comodin.attemps)
+                        (3 >= comodin.attemps)
                             ? 'Tienes poco tiempo'
                             : 'Lo sentimos'
                     }}
@@ -74,7 +75,7 @@
                     </v-chip>
                 </v-card-title>
                 <v-card-text>
-                    <template v-if="comodin.attemps <= 2">
+                    <template v-if="comodin.attemps <= 3">
                         Estos son mis familiares cercanos:
                         <v-list>
                             <v-list-item
@@ -95,13 +96,30 @@
                 </v-card-text>
             </v-card>
             <v-progress-linear
-                v-model="comodin.progress"
                 color="red accent-2"
                 indeterminate
                 reactive
             >
             </v-progress-linear>
         </v-dialog>
+        <!-- Time Over -->
+        <v-dialog v-model="game.time_over" width="300" persistent>
+            <v-card>
+                <v-card-title primary-title>
+                    Se te acabó el tiempo
+                </v-card-title>
+                <v-card-text>
+
+                </v-card-text>
+            </v-card>
+            <v-progress-linear
+                color="red accent-2"
+                indeterminate
+                reactive
+                >
+            </v-progress-linear>
+        </v-dialog>
+        <!-- Time Remaining -->
         <v-speed-dial
             absolute
             top
@@ -110,10 +128,11 @@
             >
             <template v-slot:activator>
                 <v-btn small color="red accent-2" dark fab>
-                    10
+                    {{ game.time_remaining }}
                 </v-btn>
             </template>
         </v-speed-dial>
+        <!-- Comodin Button -->
         <v-speed-dial
             absolute
             bottom
@@ -161,6 +180,10 @@ export default {
             selected_member_id: '',
             random_member: {},
             possible_members: [],
+            game: {
+                time_remaining: null,
+                time_over: false
+            },
             comodin: {
                 attemps: 0,
                 open: false,
@@ -183,9 +206,9 @@ export default {
             }, 100)
         setTimeout(() => {
             clearInterval(random_interval)
-            // console.log(self.random_member)
             self.random_member = self.members[self.generateRandomIndex(random_index)]
             self.generatePossibleMembers({ ...self.random_member })
+            self.game.time_remaining = 15
             self.ready = true
         }, 3000)
     },
@@ -233,7 +256,7 @@ export default {
         chooseMember() {
             this.$store.commit('SET_WANTED_MEMBER', this.random_member)
             this.$store.commit(
-                'SET_GUESSED_RIGHT',
+                'SET_GUESSED_STATUS',
                 this.selected_member_id === this.random_member.id
             )
             this.$router.push('/adivinar/resultados')
@@ -261,10 +284,6 @@ export default {
             this.possible_members = possible_members
         },
 
-        // chooseNears(nears) {
-        //     // let number_nears = nears.length > 3 ? nears.length : 3
-        // },
-
         showComodin() {
             this.comodin.open = true
             this.comodin.attemps++
@@ -282,6 +301,23 @@ export default {
                 this.comodin.timer = 5
             }
         },
+        'comodin.open': (new_value) => {
+            console.log(new_value)
+        },
+        'game.time_remaining': function(new_value) {
+            let self = this
+            if (new_value > 0) {
+                setTimeout(() => {
+                    self.game.time_remaining--
+                }, 1000)
+            } else {
+                self.game.time_over = true
+                setTimeout(() => {
+                    self.chooseMember()
+                    self.game.time_over = false
+                }, 3000)
+            }
+        }
     },
 }
 </script>

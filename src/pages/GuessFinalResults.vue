@@ -8,14 +8,14 @@
                     <v-col cols="12" class="text-center">
                         <h2 class="font-weight-bold">
                             {{
-                                guessed_right
-                                    ? 'Yeh!!! Adivinaste 🎉'
-                                    : 'Ohh!!! No adivinaste 😔'
+                                is_guessed
+                                    ? 'Yeh, Adivinaste 🎉 !!!'
+                                    : 'Ohh, NO adivinaste 😔 !!!'
                             }}
                         </h2>
                     </v-col>
                 </v-row>
-                <v-row dense>
+                <v-row>
                     <v-col cols="12" class="text-center">
                         <div class="d-flex justify-center">
                             <img
@@ -25,15 +25,18 @@
                         </div>
                     </v-col>
                 </v-row>
-                <v-row dense>
+                <v-row >
                     <v-col cols="12" class="text-center">
                         <h3>
                             {{
-                                guessed_right
-                                    ? `Te acordaste de mí, soy ${wanted_member.name} 🎉`
-                                    : `No te acordaste de mí, soy ${wanted_member.name} 😔`
+                                is_guessed
+                                    ? `Te acordaste de mí 🎉`
+                                    : `No te acordaste de mí 😔`
                             }}
                         </h3>
+                        <p>
+                            {{ `Soy ${wanted_member.name}` }}
+                        </p>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -75,7 +78,7 @@ export default {
     },
 
     computed: {
-        ...mapState(['wanted_member', 'guessed_right']),
+        ...mapState(['wanted_member', 'is_guessed']),
 
         memberImagePath() {
             return require(`@/assets/img/${this.wanted_member.img_path}`)
