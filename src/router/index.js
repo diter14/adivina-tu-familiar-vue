@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../pages/Home'
 import Guess from '../pages/Guess'
 import GuessSingleResults from '../pages/GuessSingleResults'
+import GuessFinalResults from '../pages/GuessFinalResults'
 import store from '../store'
 import _ from 'lodash'
 
@@ -31,7 +32,12 @@ const routes = [
                 next('/')
             }
         }
-    }
+    },
+    {
+        path: '/adivinar/fin-del-juego',
+        name: 'endgame',
+        component: GuessFinalResults
+    },
 ]
 
 const router = new VueRouter({

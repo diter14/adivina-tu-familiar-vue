@@ -4,22 +4,18 @@
         <bubble bottom color="#26a69a" />
         <v-row align="center" justify="center">
             <v-col>
-                <v-row dense>
+                <v-row>
                     <v-col cols="12" class="text-center">
-                        <h2 class="font-weight-bold">
-                            {{
-                                is_guessed
-                                    ? 'Yeh, Adivinaste 🎉 !!!'
-                                    : 'Ohh, NO adivinaste 😔 !!!'
-                            }}
-                        </h2>
+                        <h1 class="font-weight-bold">
+                            FELICIDADES
+                        </h1>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col cols="12" class="text-center">
                         <div class="d-flex justify-center">
                             <img
-                                :src="memberImagePath"
+                                src="@/assets/img/celebration.svg"
                                 class="mx-auto main-image"
                             />
                         </div>
@@ -27,16 +23,8 @@
                 </v-row>
                 <v-row >
                     <v-col cols="12" class="text-center">
-                        <h3>
-                            {{
-                                is_guessed
-                                    ? `Te acordaste de mí 🎉`
-                                    : `No te acordaste de mí 😔`
-                            }}
-                        </h3>
-                        <p>
-                            {{ `Soy ${wanted_member.name}` }}
-                        </p>
+                        <p> Eres un perfecto conocedor de tu </p>
+                        <h2> FAMILIA </h2>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -45,9 +33,10 @@
                             color="red accent-2"
                             dark
                             class="font-weight-bold"
-                            to="/adivinar"
+                            href="https://www.facebook.com/Diter-Terrones-100441208333478/"
+                            target="_blank"
                         >
-                            VOLVER A ADIVINAR
+                            COMPÁRTELO
                         </v-btn>
                     </v-col>
                 </v-row>
