@@ -66,7 +66,7 @@
             <v-card>
                 <v-card-title primary-title>
                     {{
-                        (3 >= comodin.attemps)
+                        (2 >= comodin.attemps)
                             ? 'Tienes poco tiempo'
                             : 'Lo sentimos'
                     }}
@@ -75,7 +75,7 @@
                     </v-chip>
                 </v-card-title>
                 <v-card-text>
-                    <template v-if="comodin.attemps <= 3">
+                    <template v-if="comodin.attemps <= 2">
                         Estos son mis familiares cercanos:
                         <v-list>
                             <v-list-item
@@ -206,6 +206,7 @@ export default {
             }, 100)
         setTimeout(() => {
             clearInterval(random_interval)
+            console.log(`Random index selected: ${random_index}`)
             self.random_member = self.members[self.generateRandomIndex(random_index)]
             self.generatePossibleMembers({ ...self.random_member })
             self.game.time_remaining = 15
@@ -236,20 +237,12 @@ export default {
         },
 
         generateRandomIndex(random_index) {
-            // let guessed_members = []
-            // if (localStorage.getItem('guessed-members')) {
-            //     guessed_members = JSON.parse(
-            //         localStorage.getItem('guessed-members')
-            //     )
-            //     if (guessed_members.includes(this.random_member.id)) {
-            //         return this.generateRandomIndex(random_index)
-            //     }
-            // }
-            // guessed_members.push(this.members[random_index].id)
-            // localStorage.setItem(
-            //     'guessed-members',
-            //     JSON.stringify(guessed_members)
-            // )
+            if (this.$store.state.played_members.includes(this.random_member.id)) {
+                let new_random_index = Math.floor(Math.random() * this.members.length)
+                console.log(`New random index after duplicate: ${new_random_index}`)
+                return this.generateRandomIndex(new_random_index)
+            }
+            this.$store.commit('SET_PLAYED_MEMBER', this.members[random_index].id)
             return random_index
         },
 
@@ -300,9 +293,6 @@ export default {
                 this.comodin.open = false
                 this.comodin.timer = 5
             }
-        },
-        'comodin.open': (new_value) => {
-            console.log(new_value)
         },
         'game.time_remaining': function(new_value) {
             let self = this
