@@ -27,16 +27,16 @@
                 </v-row>
                 <v-row >
                     <v-col cols="12" class="text-center">
-                        <h3>
+                        <p>
                             {{
                                 is_guessed
                                     ? `Te acordaste de mí 🎉`
                                     : `No te acordaste de mí 😔`
                             }}
-                        </h3>
-                        <p>
-                            {{ `Soy ${wanted_member.name}` }}
                         </p>
+                        <h3>
+                            {{ `Soy ${wanted_member.name}` }}
+                        </h3>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -45,9 +45,9 @@
                             color="red accent-2"
                             dark
                             class="font-weight-bold"
-                            to="/adivinar"
-                        >
-                            VOLVER A ADIVINAR
+                            :to="nextPage"
+                            >
+                            {{ nextButtonMessage }}
                         </v-btn>
                     </v-col>
                 </v-row>
@@ -58,7 +58,7 @@
 <script>
 import family from '../resources/family'
 import Bubble from '../components/svg/Bubble'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
     name: 'Guess',
@@ -78,11 +78,27 @@ export default {
     },
 
     computed: {
+        ...mapGetters(['i_won', 'i_lost']),
         ...mapState(['wanted_member', 'is_guessed']),
+
+        nextPage() {
+            return ( this.i_won || this.i_lost ) ? '/adivinar/fin-del-juego' : '/adivinar'
+        },
+
+        nextButtonMessage() {
+            return this.i_lost 
+                    ? 'PERDISTE'
+                    : this.i_won
+                        ? 'GANASTE'
+                        : 'SIGUE ADIVINANDO'
+        },
 
         memberImagePath() {
             return require(`@/assets/img/${this.wanted_member.img_path}`)
         },
     },
+
+    watch: {
+    }
 }
 </script>

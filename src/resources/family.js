@@ -21,12 +21,12 @@ export default {
             id: 2,
             name: 'Mau',
             clues: ['Paro durmiendo', 'A veces lloro', 'Soy plomo'],
-            nears: ['María de los Ángeles', 'Elena'],
+            nears: ['María', 'Elena'],
             img_path: 'cat-1.svg',
         },
         {
             id: 3,
-            name: 'Tommy',
+            name: 'Tomy',
             clues: ['Me gusta tomar sol', 'Bailarín', 'Soy juguetón'],
             nears: ['Diter', 'Olinda'],
             img_path: 'dog-happy.svg',
@@ -71,9 +71,9 @@ export default {
             id: 8,
             name: 'Randy',
             clues: [
-                'Sporting Cristal 🤍',
+                'Soy Sporting Cristal 🤍',
                 'Me gustan juegos de computadora',
-                'Soy un cra',
+                'Sigo a Youtubers de Dota',
             ],
             nears: ['Gladys', 'Elena'],
             img_path: 'teenager-1.svg',
@@ -91,7 +91,7 @@ export default {
         },
         {
             id: 10,
-            name: 'María de los Ángeles',
+            name: 'María',
             clues: [
                 'Me gusta leer libros',
                 'Estudio enfermería',

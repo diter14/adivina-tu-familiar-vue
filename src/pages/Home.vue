@@ -70,7 +70,7 @@
                         <h2
                             class="text-center font-weight-bold mb-4"
                             >
-                            Sólo tienes 10 segundos para adivinar, sigue las pistas
+                            Sólo tienes 15 segundos para adivinar, sigue las pistas
                         </h2>
                         <div class="d-flex justify-center">
                             <img
@@ -95,7 +95,7 @@
                         <h2
                             class="text-center font-weight-bold mb-4"
                             >
-                            Puedes usar los comodines hasta en 3 oportunidades
+                            Puedes usar los comodines hasta en 2 oportunidades
                         </h2>
                         <div class="d-flex justify-center">
                             <img

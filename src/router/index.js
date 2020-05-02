@@ -25,7 +25,6 @@ const routes = [
         name: 'guess_results',
         component: GuessSingleResults,
         beforeEnter: (to, from, next) => {
-            console.log(store.state.wanted_member)
             if ( !_.isEmpty(store.state.wanted_member) ) {
                 next()
             } else {
