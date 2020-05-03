@@ -237,7 +237,8 @@ export default {
         },
 
         generateRandomIndex(random_index) {
-            if (this.$store.state.played_members.includes(this.random_member.id)) {
+            let random_member_id = this.members[random_index].id
+            if (this.$store.state.played_members.includes(random_member_id)) {
                 let new_random_index = Math.floor(Math.random() * this.members.length)
                 console.log(`New random index after duplicate: ${new_random_index}`)
                 return this.generateRandomIndex(new_random_index)
