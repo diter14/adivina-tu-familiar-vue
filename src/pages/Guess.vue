@@ -56,7 +56,8 @@
                 </template>
                 <template v-else>
                     <h1 class="text-center mb-5 spacing-3" :key="'randomize-title'">
-                        {{ hideText(random_member.name) }}
+                        {{ random_member.name }}
+                        <!-- {{ hideText(random_member.name) }} -->
                     </h1>
                 </template>
             </transition-group>
@@ -203,7 +204,7 @@ export default {
             random_interval = setInterval(() => {
                 random_index = Math.floor(Math.random() * self.members.length)
                 self.random_member = self.members[random_index]
-            }, 100)
+            }, 80)
         setTimeout(() => {
             clearInterval(random_interval)
             console.log(`Random index selected: ${random_index}`)
@@ -228,9 +229,8 @@ export default {
                 }
                 let hidden_text = text
                 random_indexes.forEach((random_index) => {
-                    hidden_text = hidden_text.replaceAt(random_index, '*')
+                    hidden_text = hidden_text.replaceAt(random_index, '_')
                 })
-
                 return hidden_text
             }
             return ''
