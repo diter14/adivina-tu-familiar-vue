@@ -3,19 +3,25 @@
         <bubble top />
         <bubble bottom color="#26a69a" />
         <v-row align="center" justify="center">
-            <v-col>
+            <transition-group
+                class="col"
+                name="custom-classes-transition"
+                enter-active-class="animated fadeInDown"
+                tag="div"
+                >
                 <template v-if="ready">
-                    <v-row>
+                    <v-row key="clues-title">
                         <v-col cols="12" class="text-center">
                             <h1 class="font-weight-bold">PISTAS</h1>
                         </v-col>
                     </v-row>
-                    <v-row dense>
+                    <v-row dense key="clues-items">
                         <v-col
                             cols="12"
                             sm="12"
                             class="text-center"
-                            :key="index"
+                            style="animation-duration: 2s"
+                            :key="`${index}_${clue}`"
                             v-for="(clue, index) in random_member.clues"
                         >
                             <v-chip
@@ -28,12 +34,12 @@
                             </v-chip>
                         </v-col>
                     </v-row>
-                    <v-row dense>
+                    <v-row dense key="clues-copy">
                         <v-col cols="12" class="text-center ">
                             <p>¿Adivinaste?</p>
                         </v-col>
                     </v-row>
-                    <v-row dense>
+                    <v-row dense key="clues-selection">
                         <v-col cols="6" offset="3" class="text-center">
                             <v-select
                                 :items="possible_members"
@@ -49,17 +55,19 @@
                     </v-row>
                 </template>
                 <template v-else>
-                    <h1 class="text-center mb-5 spacing-3">
-                        {{ hideText(random_member.name) }}
+                    <h1 class="text-center mb-5 spacing-3" :key="'randomize-title'">
+                        {{ random_member.name }}
+                        <!-- {{ hideText(random_member.name) }} -->
                     </h1>
                 </template>
-            </v-col>
+            </transition-group>
         </v-row>
-        <v-dialog v-model="comodin.open" width="300" persistent>
+        <!-- Comodin Modal -->
+        <v-dialog v-model="comodin.open" width="300">
             <v-card>
                 <v-card-title primary-title>
                     {{
-                        (3 > comodin.attemps)
+                        (2 >= comodin.attemps)
                             ? 'Tienes poco tiempo'
                             : 'Lo sentimos'
                     }}
@@ -89,20 +97,47 @@
                 </v-card-text>
             </v-card>
             <v-progress-linear
-                v-model="comodin.progress"
                 color="red accent-2"
                 indeterminate
                 reactive
             >
             </v-progress-linear>
         </v-dialog>
+        <!-- Time Over -->
+        <v-dialog v-model="game.time_over" width="300" persistent>
+            <v-card>
+                <v-card-title primary-title>
+                    Se te acabó el tiempo
+                </v-card-title>
+                <v-card-text>
+
+                </v-card-text>
+            </v-card>
+            <v-progress-linear
+                color="red accent-2"
+                indeterminate
+                reactive
+                >
+            </v-progress-linear>
+        </v-dialog>
+        <!-- Time Remaining -->
         <v-speed-dial
-            fab
+            absolute
+            top
+            right
+            v-if="ready"
+            >
+            <template v-slot:activator>
+                <v-btn small color="red accent-2" dark fab>
+                    {{ game.time_remaining }}
+                </v-btn>
+            </template>
+        </v-speed-dial>
+        <!-- Comodin Button -->
+        <v-speed-dial
             absolute
             bottom
-            right
-            direction="left"
-            transition="slide-x-reverse-transition"
+            left
             v-if="ready"
             >
             <template v-slot:activator>
@@ -111,6 +146,21 @@
                 </v-btn>
             </template>
         </v-speed-dial>
+        <!-- <v-speed-dial
+            fab
+            absolute
+            bottom
+            left
+            direction="right"
+            transition="slide-x-transition"
+            v-if="ready"
+            >
+            <template v-slot:activator>
+                <v-btn color="amber lighten-1" dark fab to="/">
+                    <v-icon dark>mdi-home</v-icon>
+                </v-btn>
+            </template>
+        </v-speed-dial> -->
     </v-container>
 </template>
 <script>
@@ -131,6 +181,10 @@ export default {
             selected_member_id: '',
             random_member: {},
             possible_members: [],
+            game: {
+                time_remaining: null,
+                time_over: false
+            },
             comodin: {
                 attemps: 0,
                 open: false,
@@ -150,13 +204,13 @@ export default {
             random_interval = setInterval(() => {
                 random_index = Math.floor(Math.random() * self.members.length)
                 self.random_member = self.members[random_index]
-            }, 100)
+            }, 80)
         setTimeout(() => {
             clearInterval(random_interval)
-            console.log(self.random_member)
-            self.random_member =
-                self.members[self.generateRandomIndex(random_index)]
+            console.log(`Random index selected: ${random_index}`)
+            self.random_member = self.members[self.generateRandomIndex(random_index)]
             self.generatePossibleMembers({ ...self.random_member })
+            self.game.time_remaining = 15
             self.ready = true
         }, 3000)
     },
@@ -175,36 +229,28 @@ export default {
                 }
                 let hidden_text = text
                 random_indexes.forEach((random_index) => {
-                    hidden_text = hidden_text.replaceAt(random_index, '*')
+                    hidden_text = hidden_text.replaceAt(random_index, '_')
                 })
-
                 return hidden_text
             }
             return ''
         },
 
         generateRandomIndex(random_index) {
-            // let guessed_members = []
-            // if (localStorage.getItem('guessed-members')) {
-            //     guessed_members = JSON.parse(
-            //         localStorage.getItem('guessed-members')
-            //     )
-            //     if (guessed_members.includes(this.random_member.id)) {
-            //         return this.generateRandomIndex(random_index)
-            //     }
-            // }
-            // guessed_members.push(this.members[random_index].id)
-            // localStorage.setItem(
-            //     'guessed-members',
-            //     JSON.stringify(guessed_members)
-            // )
+            let random_member_id = this.members[random_index].id
+            if (this.$store.state.played_members.includes(random_member_id)) {
+                let new_random_index = Math.floor(Math.random() * this.members.length)
+                console.log(`New random index after duplicate: ${new_random_index}`)
+                return this.generateRandomIndex(new_random_index)
+            }
+            this.$store.commit('SET_PLAYED_MEMBER', this.members[random_index].id)
             return random_index
         },
 
         chooseMember() {
             this.$store.commit('SET_WANTED_MEMBER', this.random_member)
             this.$store.commit(
-                'SET_GUESSED_RIGHT',
+                'SET_GUESSED_STATUS',
                 this.selected_member_id === this.random_member.id
             )
             this.$router.push('/adivinar/resultados')
@@ -232,10 +278,6 @@ export default {
             this.possible_members = possible_members
         },
 
-        // chooseNears(nears) {
-        //     // let number_nears = nears.length > 3 ? nears.length : 3
-        // },
-
         showComodin() {
             this.comodin.open = true
             this.comodin.attemps++
@@ -253,6 +295,20 @@ export default {
                 this.comodin.timer = 5
             }
         },
+        'game.time_remaining': function(new_value) {
+            let self = this
+            if (new_value > 0) {
+                setTimeout(() => {
+                    self.game.time_remaining--
+                }, 1000)
+            } else {
+                self.game.time_over = true
+                setTimeout(() => {
+                    self.chooseMember()
+                    self.game.time_over = false
+                }, 3000)
+            }
+        }
     },
 }
 </script>
@@ -260,7 +316,7 @@ export default {
 .spacing-3 {
     letter-spacing: 3px;
 }
-.v-speed-dial--bottom {
-    bottom: 50px !important;
-}
+// .v-speed-dial--bottom {
+//     bottom: 50px !important;
+// }
 </style>
